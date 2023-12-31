@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder,SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT || 4000;
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle("Swagger application for backend")
@@ -22,10 +22,10 @@ async function bootstrap() {
     .build()
     
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("/api", app, document);
+  SwaggerModule.setup("/docs", app, document);
   app.enableCors();
   await app.listen(PORT, () =>
-    console.log(`server started http://localhost:${PORT}`),
+    console.log(`server started http://localhost:${PORT}/docs`),
   );
 }
 bootstrap();
