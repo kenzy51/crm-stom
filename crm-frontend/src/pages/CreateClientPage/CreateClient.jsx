@@ -1,14 +1,14 @@
 import { Button, Form, Input, message } from "antd";
 import axios from "axios";
 import React from "react";
+import {baseUrl} from "../../config";
 
 const CreateClientPage = () => {
   const onFinish = (values) => {
     axios
-      .post("http://localhost:4000/users", values)
+      .post(`${baseUrl}/users`, values)
       .then((response) => {
-        console.log("Client created:", response.data);
-        message.success("Client created successfully!");
+        message.success("Клиент создан!");
       })
       .catch((error) => {
         console.error("Error creating client:", error);
@@ -25,39 +25,23 @@ const CreateClientPage = () => {
           blackList: false, // Setting default value for blackList field
         }}
       >
-        <Form.Item
-          label="ФИО"
-          name="username"
-          rules={[{ required: true, message: "Please input username!" }]}
-        >
+        <Form.Item label="ФИО" name="username">
           <Input />
         </Form.Item>
         <Form.Item
           label="Номер телефона"
           name="phoneNumber"
-          rules={[{ required: true, message: "Please input phone number!" }]}
+          initialValue={"+996"}
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Диагноз"
-          name="problem"
-          rules={[{ required: true, message: "Please input problem!" }]}
-        >
+        <Form.Item label="Диагноз" name="problem">
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Сумма денег"
-          name="money"
-          rules={[{ required: true, message: "Please input money!" }]}
-        >
-          <Input />
+        <Form.Item label="Сумма денег" name="money">
+          <Input placeholder="30.000 сом или 300 usd" />
         </Form.Item>
-        <Form.Item
-          label="Описание"
-          name="description"
-          rules={[{ required: true, message: "Please input description!" }]}
-        >
+        <Form.Item label="Описание" name="description">
           <Input.TextArea />
         </Form.Item>
         <Form.Item>
